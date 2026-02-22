@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Interactive Lion</title>
+<title>Animated Lion</title>
 
 <style>
   body {
@@ -131,6 +131,7 @@
   }
 
   /* Animations */
+
   @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
@@ -146,10 +147,12 @@
     50% { transform: translateX(-50%) scaleY(1.05); }
   }
 
+  /* Synchronized blinking with double blink */
   @keyframes blink {
-    0%, 92%, 100% { transform: scaleY(1); }
-    94% { transform: scaleY(0.1); }
-    95% { transform: scaleY(1); }
+    0%, 88%, 100% { transform: scaleY(1); }
+    90% { transform: scaleY(0.1); }
+    93% { transform: scaleY(1); }
+    96% { transform: scaleY(0.1); }
   }
 
 </style>
@@ -169,28 +172,6 @@
   <div class="tail"></div>
 </div>
 
-<script>
-  const eyes = document.querySelectorAll('.eye');
-  const lion = document.querySelector('.lion');
-
-  document.addEventListener('mousemove', (e) => {
-    const lionRect = lion.getBoundingClientRect();
-    const lionCenterX = lionRect.left + lionRect.width / 2;
-    const lionCenterY = lionRect.top + lionRect.height / 2;
-
-    const dx = e.clientX - lionCenterX;
-    const dy = e.clientY - lionCenterY;
-
-    const maxMove = 4; // maximum eye movement in px
-    const angle = Math.atan2(dy, dx);
-
-    eyes.forEach(eye => {
-      const moveX = Math.cos(angle) * maxMove;
-      const moveY = Math.sin(angle) * maxMove;
-      eye.style.transform = `translate(${moveX}px, ${moveY}px) scaleY(${eye.style.transform.includes('scaleY') ? eye.style.transform.match(/scaleY\(([^)]+)\)/)[1] : 1})`;
-    });
-  });
-</script>
-
 </body>
 </html>
+
